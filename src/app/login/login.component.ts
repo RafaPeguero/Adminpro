@@ -45,7 +45,10 @@ export class LoginComponent implements OnInit {
     this.auth2.attachClickHandler(element, {}, (googleUser) => {
       // let profile = googleUser.getBasicProfile();
       let token = googleUser.getAuthResponse().id_token;
-      this._usuarioServices.loginGoogle(token).subscribe( correcto => window.location.href = '#/dashboard' );
+      this._usuarioServices.loginGoogle(token).subscribe( correcto => {
+        window.location.href = '#/dashboard';
+        console.log(token);
+      });
     });
   }
   ingresar(forma: NgForm) {
@@ -54,9 +57,8 @@ export class LoginComponent implements OnInit {
     }
 
     let usuario = new Usuario(null, forma.value.email, forma.value.password);
-    this._usuarioServices.login(usuario, forma.value.recuerdame ).subscribe(correcto => this.router.navigate(['/dashboard']));
+    this._usuarioServices.login(usuario, forma.value.recuerdame ).subscribe(correcto => {this.router.navigate(['/dashboard'])});
 
-    // this.router.navigate(['/dashboard']);
   }
 
 }

@@ -2,10 +2,10 @@ import { Component, OnInit, group } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from './../services/service.index';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
-import { Usuario } from '../models/usuario.model';
 const swal: SweetAlert = _swal as any;
 
 
