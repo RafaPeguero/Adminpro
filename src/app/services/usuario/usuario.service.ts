@@ -122,18 +122,16 @@ export class UsuarioService {
           .catch( resp => {
             console.log( resp );
           }) ;
+  }
 
-    // this._subirArchivoService.subirArchivo(archivo, 'usuarios', id ).then((resp: any) => {
+  cargarUsuarios( desde: number = 0) {
+    let url = URL_SERVICIOS + '/usuario?desde=' + desde;
+    return this.http.get(url);
+  }
 
-    //   this.usuario.img = resp.usuario.img;
-
-    //   swal('Imagen actualizada', this.usuario.nombre, 'success');
-
-    //   this.guardarStorage(id, this.token, this.usuario);
-
-    // }).catch(resp => {
-    //   console.log(resp);
-    // });
+  buscarUsuarios(termino: string) {
+    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+    return this.http.get(url).map((resp: any) => resp.usuario);
   }
 
 
