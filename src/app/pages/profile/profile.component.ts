@@ -11,10 +11,12 @@ declare function init_plugins();
 export class ProfileComponent implements OnInit {
 
   usuario: Usuario;
+  imagenTemp: String;
 
   imagenSubir: File;
   constructor( public _usuarioService: UsuarioService) {
     this.usuario = this._usuarioService.usuario;
+
    }
 
   ngOnInit() {
@@ -31,11 +33,21 @@ export class ProfileComponent implements OnInit {
   }
 
   seleccionImage( archivo: File ) {
-    if ( archivo ) {
-      this.imagenSubir = archivo;
-    } else {
+    if ( !archivo ) {
       this.imagenSubir = null;
     }
+    if ( archivo.type.indexOf('image') < 0 ) {
+      swal('Sólo imágenes', 'El archivo seleccionado no es una imagen', 'error');
+      this.imagenSubir = null;
+      return;
+    }
+
+    this.imagenSubir = archivo;
+
+    let reader = new FileReader();
+    let urlImagenTemp = reader.readAsDataURL(archivo);
+
+    reader.onloadend = () => this.imagenTemp = reader.result;
   }
 
   cambiarImagen() {
