@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 
-declare function init_plugins();
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
    }
 
   ngOnInit() {
-    init_plugins();
   }
 
   guardar( usuario: Usuario) {

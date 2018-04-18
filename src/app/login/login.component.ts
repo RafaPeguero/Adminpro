@@ -5,7 +5,7 @@ import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
 import { element } from 'protractor';
 
-declare function init_plugins();
+
 declare const gapi: any;
 
 @Component({
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
                 public _usuarioServices: UsuarioService ) { }
 
   ngOnInit() {
-    init_plugins();
+
     this.googleInit();
     this.email = localStorage.getItem('email') || '';
     if (this.email.length > 1) {

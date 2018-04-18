@@ -10,7 +10,7 @@ const swal: SweetAlert = _swal as any;
 
 
 
-declare function init_plugins();
+
 @Component ({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -38,7 +38,6 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    init_plugins();
     this.forma = new FormGroup({
       nombre: new FormControl(null , Validators.required),
       correo: new FormControl(null , [Validators.required, Validators.email]),

@@ -4,6 +4,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { ThrowStmt } from '@angular/compiler';
 import { Hospital } from './../../models/hospital.model';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class HospitalService {
@@ -32,14 +33,20 @@ export class HospitalService {
     let url = URL_SERVICIOS + '/hospital/' + id;
     url += '?token=' + this._usuarioService.token;
 
-    return this.http.delete(url).map( resp => swal('Hospital Borrado', 'Eliminado correctamente', 'success'));
+    return this.http.delete(url).map( resp => swal('Hospital Borrado', 'Eliminado correctamente', 'success')).catch( err => {
+      swal(err.error.mensaje , err.error.errors.message, 'error');
+      return Observable.throw(err);
+    });
   }
 
   crearHospital( nombre: string) {
     let url = URL_SERVICIOS + '/hospital';
     url += '?token=' + this._usuarioService.token;
 
-    return this.http.post(url , {nombre}).map( (resp: any) => resp.hospital);
+    return this.http.post(url , {nombre}).map( (resp: any) => resp.hospital).catch( err => {
+      swal(err.error.mensaje , err.error.errors.message, 'error');
+      return Observable.throw(err);
+    });
   }
 
   buscarHospital(termino: string) {
@@ -54,6 +61,9 @@ export class HospitalService {
     return this.http.put(url , hospital).map( (resp: any) => {
       swal('Hospital Actualizado', hospital.nombre, 'success');
       return resp.hospital;
+    }).catch( err => {
+      swal(err.error.mensaje , err.error.errors.message, 'error');
+      return Observable.throw(err);
     });
   }
 
